@@ -3,6 +3,11 @@
 args = ARGV
 puts "You ran Hyde with these arguments: #{args}"
 
+def initialize(args)
+  @tree_create = Fileio.new.create_new_tree_structure(filename)
+end
+# bin/hyde new ~/my-sweet-blog --> This is what you'll run in the CLI
+
 # ##############
 # Your code here
 # ##############
