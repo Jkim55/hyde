@@ -3,6 +3,8 @@ require './test/test_helper'
 
 class FileioTest < Minitest::Test
 
+  #TODO Test for Edge cases, Change File Paths
+
   def test_we_can_write_some_files
     assert Fileio.new.class
   end
@@ -16,6 +18,5 @@ class FileioTest < Minitest::Test
   # skip
   #   FileUtils.rm_rf(@file_path) if File.directory?(@file_path)
   # end
-
 
 end

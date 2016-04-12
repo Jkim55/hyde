@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
+require './lib/fileio'
 
-args = ARGV
-puts "You ran Hyde with these arguments: #{args}"
+arg0 = ARGV[0]
+arg1 = ARGV[1]
 
-def initialize(args)
-  @tree_create = Fileio.new.create_new_tree_structure(filename)
+puts "You ran Hyde with these arguments: #{arg0} #{arg1}."
+
+if arg0 == "new"
+  Fileio.new.create_tree_structure(arg1)
+else
+  puts "Error! '#{arg1}' doesn't compute! Moron!"
 end
-# bin/hyde new ~/my-sweet-blog --> This is what you'll run in the CLI
-
-# ##############
-# Your code here
-# ##############
