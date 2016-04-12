@@ -16,12 +16,12 @@ class FileioTest < Minitest::Test
 
   def test_we_can_source_create_tree_structure
     file = Fileio.new
-    file.create_source_tree_structure("/Users/colinosborn/Turing/Mod1/Projects/hyde/blah")
+    file.create_source_tree_structure("/Users/colinosborn/Turing/Mod1/Projects/hyde/testingfolder")
   end
 
   def test_we_can_create_output_files
     file = Fileio.new
-    file.create_output_file_structure("/Users/colinosborn/Turing/Mod1/Projects/hyde/blah")
+    file.build_output_file_structure("/Users/colinosborn/Turing/Mod1/Projects/hyde/testingfolder")
   end
 
 end

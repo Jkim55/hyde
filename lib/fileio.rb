@@ -1,4 +1,6 @@
 require 'fileutils'
+require './lib/parse'
+require 'kramdown'
 require 'pry'
 
 class Fileio
@@ -8,28 +10,29 @@ class Fileio
       result = "Error! Directory #{filepath} already exists."
     else
       FileUtils.mkdir_p "#{filepath}/source/css"
-      FileUtils.touch "#{filepath}/source/css/main.css"
+      File.write("#{filepath}/source/css/main.css", File.read("./text/maincss.txt"))
       FileUtils.mkdir_p "#{filepath}/source/pages"
-      FileUtils.touch "#{filepath}/source/pages/about.md"
+      File.write("#{filepath}/source/pages/about.md", File.read("./text/about.txt"))
       FileUtils.mkdir_p "#{filepath}/source/posts"
-      FileUtils.touch "#{filepath}/source/posts/2016-04-12-welcome-to-hyde.md"
+      File.write("#{filepath}/source/posts/2016-04-12-welcome-to-hyde.md", File.read("./text/welcome.txt"))
       FileUtils.mkdir_p "#{filepath}/source/"
-      FileUtils.touch "#{filepath}/source/index.md"
+      File.write("#{filepath}/source/index.md", File.read("./text/index.txt"))
       FileUtils.mkdir_p "#{filepath}/_output"
       result = "Voila! File structure created!"
     end
     puts "#{result}"
   end
 
-  def create_output_file_structure(filepath)
+  def build_output_file_structure(filepath)
     FileUtils.mkdir_p "#{filepath}/_output/css"
-    FileUtils.touch "#{filepath}/_output/css/main.css"
+    # FileUtils.touch "#{filepath}/_output/css/main.css"
     FileUtils.mkdir_p "#{filepath}/_output/pages"
-    FileUtils.touch "#{filepath}/_output/pages/about.html"
+    # FileUtils.touch "#{filepath}/_output/pages/about.html"
     FileUtils.mkdir_p "#{filepath}/_output/posts"
-    FileUtils.touch "#{filepath}/_output/posts/2016-04-12-welcome-to-hyde.html"
+    # FileUtils.touch "#{filepath}/_output/posts/2016-04-12-welcome-to-hyde.html"
     FileUtils.mkdir_p "#{filepath}/_output/"
-    FileUtils.touch "#{filepath}/_output/index.html"
+    # FileUtils.touch "#{filepath}/_output/index.html"
+    Parse.collect_md(filepath)
     result = "Voila! Output files parsed!"
     puts "#{result}"
   end
