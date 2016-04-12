@@ -9,14 +9,19 @@ class FileioTest < Minitest::Test
     assert Fileio.new.class
   end
 
-  def test_we_create_tree_structure
-    file = Fileio.new
-    file.create_new_tree_structure("my-sweet-blog")
-  end
-
   # def teardown
   # skip
   #   FileUtils.rm_rf(@file_path) if File.directory?(@file_path)
   # end
+
+  def test_we_can_source_create_tree_structure
+    file = Fileio.new
+    file.create_source_tree_structure("/Users/colinosborn/Turing/Mod1/Projects/hyde/blah")
+  end
+
+  def test_we_can_create_output_files
+    file = Fileio.new
+    file.create_output_file_structure("/Users/colinosborn/Turing/Mod1/Projects/hyde/blah")
+  end
 
 end
