@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require './lib/fileio'
+require 'kramdown'
 
 arg0 = ARGV[0]
 arg1 = ARGV[1]
@@ -9,7 +10,7 @@ puts "You ran Hyde with these arguments: #{arg0} #{arg1}."
 if arg0 == "new"
   Fileio.new.create_source_tree_structure(arg1)
 elsif arg0 == "build"
-  Fileio.new.create_output_file_structure(arg1)
+  Fileio.new.build_output_file_structure(arg1)
 else
   puts "Error! '#{arg1}' doesn't compute! Moron!"
 end
