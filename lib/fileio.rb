@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'erb'
 require './lib/file_converter'
 require 'kramdown'
 require 'pry'
@@ -19,6 +20,8 @@ class Fileio
       File.write("#{filepath}/source/posts/#{date}-welcome-to-hyde.md", File.read("./text/welcome.txt"))
       FileUtils.mkdir_p "#{filepath}/source/"
       File.write("#{filepath}/source/index.md", File.read("./text/index.txt"))
+      FileUtils.mkdir_p "#{filepath}/source/layouts"
+      File.write("#{filepath}/source/layouts/default.html.erb", File.read("./text/default.txt"))
       FileUtils.mkdir_p "#{filepath}/_output"
       result = "Voila! File structure created!"
     end
@@ -32,6 +35,7 @@ class Fileio
     FileUtils.mkdir_p "#{filepath}/_output/posts"
     FileUtils.mkdir_p "#{filepath}/_output/"
     FileConverter.convert_to_html(filepath)
+    FileConverter.inject_erb(filepath)
     result = "Voila! Output files parsed into HTML!"
     puts "#{result}"
   end

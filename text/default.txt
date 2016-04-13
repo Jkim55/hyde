@@ -7,10 +7,7 @@
   </head>
   <body>
 
-   Welcome to your new blog!
-  It's better than WordPress because, you made this blog!!!
-
-   Hyde
+  <%=     puts "This works!"        %>
 
   </body>
 </html>
