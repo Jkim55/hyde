@@ -14,4 +14,13 @@ class FileConverter
       File.rename(lines, lines.split(".")[0] + ".html")
     end
   end
+
+  def self.inject_erb(filepath)
+    inject = Dir.glob("#{filepath}/source/**/*.md")
+    inject.each do |lines|
+      current_file = File.read(lines)
+      erb = ERB.new(current_file).result(binding)
+      File.write(lines, erb)
+    end
+  end
 end

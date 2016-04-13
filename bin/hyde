@@ -2,8 +2,6 @@
 require './lib/fileio'
 require 'kramdown'
 
-# arg0 = ARGV[0]
-# ARGV[1] = ARGV[1]
 arg2 = ARGV[2..-1].join("-")
 date = Time.now.strftime("%Y-%d-%m")
 
