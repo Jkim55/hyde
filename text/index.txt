@@ -1,4 +1,4 @@
 # Welcome to your new fucking blog!
-# It's better than wordpress because, you made that shit!!!
+ It's better than word press because, you made that shit!!!
 
-## Pizza
+# Pizza

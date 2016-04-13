@@ -2,9 +2,9 @@ require 'pry'
 require 'fileutils'
 require 'kramdown'
 
-class Parse
+class FileConverter
 
-  def self.collect_md(filepath)
+  def self.convert_to_html(filepath)
     markdown = Dir.glob("#{filepath}/source/**/*.md")
     markdown.each do |lines|
       current_file = File.read(lines)

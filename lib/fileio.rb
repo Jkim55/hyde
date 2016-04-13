@@ -1,5 +1,5 @@
 require 'fileutils'
-require './lib/parse'
+require './lib/file_converter'
 require 'kramdown'
 require 'pry'
 
@@ -32,7 +32,7 @@ class Fileio
     # FileUtils.touch "#{filepath}/_output/posts/2016-04-12-welcome-to-hyde.html"
     FileUtils.mkdir_p "#{filepath}/_output/"
     # FileUtils.touch "#{filepath}/_output/index.html"
-    Parse.collect_md(filepath)
+    FileConverter.convert_to_html(filepath)
     result = "Voila! Output files parsed!"
     puts "#{result}"
   end
