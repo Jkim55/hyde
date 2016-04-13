@@ -25,13 +25,10 @@ class Fileio
 
   def build_output_file_structure(filepath)
     FileUtils.mkdir_p "#{filepath}/_output/css"
-    # FileUtils.touch "#{filepath}/_output/css/main.css"
+    FileUtils.cp_r("#{filepath}/source/css/main.css", "#{filepath}/_output/css/main.css" )
     FileUtils.mkdir_p "#{filepath}/_output/pages"
-    # FileUtils.touch "#{filepath}/_output/pages/about.html"
     FileUtils.mkdir_p "#{filepath}/_output/posts"
-    # FileUtils.touch "#{filepath}/_output/posts/2016-04-12-welcome-to-hyde.html"
     FileUtils.mkdir_p "#{filepath}/_output/"
-    # FileUtils.touch "#{filepath}/_output/index.html"
     FileConverter.convert_to_html(filepath)
     result = "Voila! Output files parsed!"
     puts "#{result}"
