@@ -5,7 +5,6 @@ class FileioTest < Minitest::Test
 
   #TODO Test for Edge cases, Change File Paths
   #TODO Ask about File testing and Iteration 2
-  #TODO ARGV -- Grabbing multiple words to form one string title ie, My-juicy-post
 
   def test_we_can_write_some_files
     assert Fileio.new.class

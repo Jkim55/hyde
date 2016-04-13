@@ -4,7 +4,7 @@ require 'kramdown'
 
 arg0 = ARGV[0]
 arg1 = ARGV[1]
-arg2 = ARGV[2]
+arg2 = ARGV[2..-1].join("-")
 date = Time.now.strftime("%Y-%d-%m")
 
 puts "You ran Hyde with these arguments: #{arg0} #{arg1}."
@@ -14,7 +14,7 @@ if arg0 == "new"
 elsif arg0 == "build"
   Fileio.new.build_output_file_structure(arg1)
 elsif arg0 == "post"
-  File.write("#{arg1}/source/posts/#{date + "-" + arg2}.md", "# #{arg2}\n\n Your content here, start writing Hemmingway!" )
+  File.write("#{arg1}/source/posts/#{date + "-" + arg2}.md", "# #{arg2.gsub!("-", " ")}\n\n Your content here, start writing Hemmingway!" )
   puts "Created a new post file at #{arg1}/source/posts/#{date}-#{arg2}.markdown"
 else
   puts "Error! '#{arg1}' doesn't compute! Moron!"
