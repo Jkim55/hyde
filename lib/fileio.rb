@@ -9,12 +9,14 @@ class Fileio
     if Dir.exist?(filepath)
       result = "Error! Directory #{filepath} already exists."
     else
+      date = Time.now.strftime("%Y-%d-%m")
+
       FileUtils.mkdir_p "#{filepath}/source/css"
       File.write("#{filepath}/source/css/main.css", File.read("./text/maincss.txt"))
       FileUtils.mkdir_p "#{filepath}/source/pages"
       File.write("#{filepath}/source/pages/about.md", File.read("./text/about.txt"))
       FileUtils.mkdir_p "#{filepath}/source/posts"
-      File.write("#{filepath}/source/posts/2016-04-12-welcome-to-hyde.md", File.read("./text/welcome.txt"))
+      File.write("#{filepath}/source/posts/#{date}-welcome-to-hyde.md", File.read("./text/welcome.txt"))
       FileUtils.mkdir_p "#{filepath}/source/"
       File.write("#{filepath}/source/index.md", File.read("./text/index.txt"))
       FileUtils.mkdir_p "#{filepath}/_output"
@@ -30,7 +32,7 @@ class Fileio
     FileUtils.mkdir_p "#{filepath}/_output/posts"
     FileUtils.mkdir_p "#{filepath}/_output/"
     FileConverter.convert_to_html(filepath)
-    result = "Voila! Output files parsed!"
+    result = "Voila! Output files parsed into HTML!"
     puts "#{result}"
   end
 
