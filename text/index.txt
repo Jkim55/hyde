@@ -7,10 +7,10 @@
   </head>
   <body>
 
-   Welcome to your new blog!
+  Welcome to your new blog!
   It's better than WordPress because, you made this blog!!!
 
-   Hyde
+  Hyde
 
   </body>
 </html>

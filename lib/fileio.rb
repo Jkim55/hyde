@@ -36,6 +36,7 @@ class Fileio
     FileUtils.mkdir_p "#{filepath}/_output/"
     FileConverter.convert_to_html(filepath)
     FileConverter.inject_erb(filepath)
+    # FileUtils.cp_r("#{filepath}/source/layouts/default.html.erb", "#{filepath}/_output/posts )
     result = "Voila! Output files parsed into HTML!"
     puts "#{result}"
   end

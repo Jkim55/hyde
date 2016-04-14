@@ -9,6 +9,7 @@ class FileConverter
     markdown.each do |lines|
       current_file = File.read(lines)
       markdown = Kramdown::Document.new(current_file, :auto_ids => false).to_html
+      binding.pry
       lines.sub!("source","_output")
       File.write(lines, markdown)
       File.rename(lines, lines.split(".")[0] + ".html")
