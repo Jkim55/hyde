@@ -12,14 +12,14 @@ class FileioTest < Minitest::Test
   def test_we_can_source_create_tree_structure
     file = Fileio.new
     file.build_source_tree_structure("testfolder1")
-    assert File.exist?("testfolder1")
+    assert Dir.exist?("testfolder1")
   end
 
   def test_we_can_build_output_files
     file = Fileio.new
     file.build_source_tree_structure("testfolder2")
     file.build_output_tree_structure("testfolder2")
-    assert File.exist?("testfolder2")
+    assert Dir.exist?("testfolder2")
   end
 
   def test_we_can_convert_md_to_html
