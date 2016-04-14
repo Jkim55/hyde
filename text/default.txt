@@ -3,11 +3,13 @@
   <head>
     <link rel="stylesheet" type="text/css" href="main.css">
     <meta charset="utf-8">
-    <title></title>
+
+    <title><%= @page.title %></title>
+
   </head>
   <body>
 
-  <%=     puts "This works!"        %>
+  <%= @page.body %>
 
   </body>
 </html>

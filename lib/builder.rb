@@ -18,4 +18,5 @@ class Builder
   def format_body
     body = "<body>#{body}</body>"
   end
+
 end
