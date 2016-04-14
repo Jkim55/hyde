@@ -3,13 +3,14 @@
   <head>
     <link rel="stylesheet" type="text/css" href="main.css">
     <meta charset="utf-8">
-
-    <title><%= @page.title %></title>
-
+    <title></title>
   </head>
   <body>
 
-  <%= @builder.body %>
+  Welcome to your new blog!
+  It's better than WordPress because, you made this blog!!!
+
+  Hyde
 
   </body>
 </html>
