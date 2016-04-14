@@ -4,23 +4,23 @@ require './lib/file_converter'
 require 'kramdown'
 require 'pry'
 
-class Fileio
+class Generator
   def build_source_tree_structure(filepath)
     if Dir.exist?(filepath)
       result = "Error! Directory #{filepath} already exists."
     else
       generate_source_folders(filepath)
       generate_source_files(filepath)
-      result = "Voila! File structure created!"
+      result = "Voila! File structure generated!"
     end
     puts "#{result}"
   end
 
   def generate_source_folders(filepath)
+    FileUtils.mkdir_p "#{filepath}/source/"
     FileUtils.mkdir_p "#{filepath}/source/css"
     FileUtils.mkdir_p "#{filepath}/source/pages"
     FileUtils.mkdir_p "#{filepath}/source/posts"
-    FileUtils.mkdir_p "#{filepath}/source/"
     FileUtils.mkdir_p "#{filepath}/source/layouts"
     FileUtils.mkdir_p "#{filepath}/_output"
   end
@@ -30,7 +30,7 @@ class Fileio
     File.write("#{filepath}/source/css/main.css", File.read("./text/maincss.txt"))
     File.write("#{filepath}/source/pages/about.md", File.read("./text/about.txt"))
     File.write("#{filepath}/source/posts/#{date}-welcome-to-hyde.md", File.read("./text/welcome.txt"))
-    File.write("#{filepath}/source/index.md", File.read("./text/index.txt"))
+    File.write("#{filepath}/source/index.md", File.read("./text/default.txt"))
     File.write("#{filepath}/source/layouts/default.html.erb", File.read("./text/default.txt"))
   end
 
@@ -39,8 +39,8 @@ class Fileio
     create_output_folders(filepath)
     copy_source_files_to_output(filepath)
     FileConverter.convert_to_html(filepath)
-    FileConverter.inject_erb(filepath)
-    # FileUtils.cp_r("#{filepath}/source/layouts/default.html.erb", "#{filepath}/_output/posts )
+    FileConverter.reformat(filepath)
+
     result = "Voila! Output files parsed into HTML!"
     puts "#{result}"
   end

@@ -16,12 +16,12 @@ class FileConverter
     end
   end
 
-  def self.inject_erb(filepath)
-    inject = Dir.glob("#{filepath}/source/**/*.md")
-    inject.each do |lines|
-      current_file = File.read(lines)
-      erb = ERB.new(current_file).result(binding)
-      File.write(lines, erb)
+  def self.reformat(filepath)
+      this = Dir.glob("#{filepath}/_output/**/*.html")
+      this.each do |files|
+        content = File.read(files)
+        erb = ERB.new(File.read("#{filepath}/source/layouts/default.html.erb")).result(binding)
+        File.write(files, erb)
+      end
     end
-  end
 end

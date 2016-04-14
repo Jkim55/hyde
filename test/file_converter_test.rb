@@ -1,5 +1,5 @@
 require './test/test_helper'
-require './lib/fileio'
+require './lib/Generator'
 require './lib/file_converter'
 
 class FileConverterTest < Minitest::Test
@@ -12,7 +12,7 @@ class FileConverterTest < Minitest::Test
   def test_we_can_convert_md_to_html_for_output
     skip    # This does not work... why am i getting arg error?
             # How can i test that files exist?
-    file = Fileio.new
+    file = Generator.new
     file.build_source_tree_structure("testproject")
     file.build_output_tree_structure("testproject")
     # output = FileConverter.convert_to_html("testproject")
