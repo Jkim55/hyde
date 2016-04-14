@@ -1,20 +1,20 @@
 #!/usr/bin/env ruby
-require './lib/fileio'
+require './lib/Generator'
 require 'kramdown'
 
-arg2 = ARGV[2..-1].join("-")
+arg_title = ARGV[2..-1].join("-")
 date = Time.now.strftime("%Y-%d-%m")
 
 puts "You ran Hyde with these arguments: #{ARGV[0]} #{ARGV[1]}."
 
-if ARGV[0] == "new"
-  Fileio.new.create_source_tree_structure(ARGV[1])
-elsif ARGV[0] == "build"
-  Fileio.new.build_output_file_structure(ARGV[1])
-elsif ARGV[0] == "post"
-  File.write("#{ARGV[1]}/source/posts/#{date + "-" + arg2}.md", "# #{arg2.gsub!("-", " ")}\n\nYour content here.\nStart writing, Hemmingway!")
-  # File.write("#{ARGV[1]}/source/posts/#{arg2}.html", File.read("./text/index.txt"))
-  puts "Created a new post file at #{ARGV[1]}/source/posts/#{date}-#{arg2}.markdown"
+case ARGV[0].downcase
+when "new"
+  Generator.new.build_source_tree_structure(ARGV[1])
+when "build"
+  Generator.new.build_output_tree_structure(ARGV[1])
+when "post"
+  File.write("#{ARGV[1]}/source/posts/#{date + "-" + arg_title}.md", "# #{arg_title.gsub!("-", " ")}\n\nYour content here.\nStart writing, Hemmingway!")
+  puts "Created a new post file at #{ARGV[1]}/source/posts/#{date}-#{ARGV[2..-1].join("-")}.markdown"
 else
-  puts "Error! '#{ARGV[1]}' doesn't compute! Moron!"
+  puts "Error! '#{ARGV[1]}' doesn't compute!"
 end

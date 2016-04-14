@@ -7,7 +7,8 @@
   </head>
   <body>
 
-  <%=     puts "This works!"        %>
+    <%= erb %>
+    <%= content %>
 
   </body>
 </html>
