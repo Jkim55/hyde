@@ -5,8 +5,7 @@ require 'kramdown'
 require 'pry'
 
 class Fileio
-
-  def create_source_tree_structure(filepath)
+  def build_source_tree_structure(filepath)
     if Dir.exist?(filepath)
       result = "Error! Directory #{filepath} already exists."
     else
@@ -36,7 +35,7 @@ class Fileio
   end
 
 
-  def build_output_file_structure(filepath)
+  def build_output_tree_structure(filepath)
     create_output_folders(filepath)
     copy_source_files_to_output(filepath)
     FileConverter.convert_to_html(filepath)
@@ -52,9 +51,8 @@ class Fileio
     FileUtils.mkdir_p "#{filepath}/_output/posts"
     FileUtils.mkdir_p "#{filepath}/_output/"
   end
-  
+
   def copy_source_files_to_output(filepath)
     FileUtils.cp_r("#{filepath}/source/css/main.css", "#{filepath}/_output/css/main.css" )
   end
-
 end

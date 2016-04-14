@@ -8,9 +8,9 @@
   <body>
 
   Welcome to your new blog!
-  It's better than WordPress because, you made this blog!!!
+  It's better than WordPress because you made it!!!
 
   Hyde
-
+  
   </body>
 </html>

@@ -1,47 +1,51 @@
 require "./lib/fileio"
 require './test/test_helper'
 
+#TODO Test for Edge cases, Change File Paths
+#TODO Ask about File testing and Iteration 2
+
 class FileioTest < Minitest::Test
-
-  #TODO Test for Edge cases, Change File Paths
-  #TODO Ask about File testing and Iteration 2
-
   def test_we_can_write_some_files
     assert Fileio.new.class
   end
 
-  # def teardown
-  # skip
-  #   FileUtils.rm_rf("testingfolder") if File.directory?("testingfolder")
-  # end
-
   def test_we_can_source_create_tree_structure
-    skip
     file = Fileio.new
-    file.create_source_tree_structure("testingfolder/source")
-    assert File.exist?("testingfolder/source")
+    file.build_source_tree_structure("testfolder1")
+    assert File.exist?("testfolder1")
   end
 
   def test_we_can_build_output_files
-    skip
     file = Fileio.new
-    file.build_output_file_structure("testingfolder/_output")
-    assert File.exist?("testingfolder/_output")
+    file.build_source_tree_structure("testfolder2")
+    file.build_output_tree_structure("testfolder2")
+    assert File.exist?("testfolder2")
   end
 
   def test_we_can_convert_md_to_html
-    skip # must call build
     file = Fileio.new
-    output = file.build_output_file_structure("testingfolder")
-    content = File.read("testingfolder/_output/index.html")
-    assert_equal "<h1>Welcome to your new fucking blog!</h1>\n<p>It’s better than word press because, you made that shit!!!</p>\n\n<h1>Pizza</h1>\n", content
+    file.build_source_tree_structure("testfolder3")
+    file.build_output_tree_structure("testfolder3")
+    output = file.build_output_tree_structure("testfolder3")
+    content = File.read("testfolder3/_output/index.html")
+
+    assert content.include?("<body>\n\n  Welcome to your new blog!")
   end
 
   def test_we_are_copying_css_file_from_source_to_output
-    skip # must call build
     file = Fileio.new
-    output = file.build_output_file_structure("testingfolder")
-    content = File.read("testingfolder/_output/CSS/main.css")
-    assert_equal "body {\n background-color: yellow;\n}\n h1 {\n background-color: #00ff00;\n} \n p {\n background-color: 798FB2;\n}", content
+    file.build_source_tree_structure("testfolder4")
+    file.build_output_tree_structure("testfolder4")
+    output = file.build_output_tree_structure("testfolder4")
+    content = File.read("testfolder4/_output/CSS/main.css")
+
+    assert content.include?("body {\n    background-color: yellow;")
+  end
+
+  def teardown
+    FileUtils.rm_rf("testfolder1") if File.directory?("testfolder1")
+    FileUtils.rm_rf("testfolder2") if File.directory?("testfolder2")
+    FileUtils.rm_rf("testfolder3") if File.directory?("testfolder3")
+    FileUtils.rm_rf("testfolder4") if File.directory?("testfolder4")
   end
 end
