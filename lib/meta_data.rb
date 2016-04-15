@@ -1,24 +1,28 @@
 require 'pry'
 
 class MetaData
-  def initialize
-    @values_only = values_only
-  end
+  # def initialize
+  #   @values_only = values_only
+  # end
 
   def self.create_tag_hash(filepath)
     line_two = Dir.glob("#{filepath}/source/**/*.md")
-    line_two.each do |lines|
-      text = File.read(lines)
-      if text.include?("tags:")
-        a = (text.split("\n---"))[0].delete("---").strip.split(": ")
-        b = a[0]
-        c = a[1].delete('"').split(', ')
-        tags = Hash.new
-        tags[b] = c
-        @values_only = tags.values.flatten
+    until line_two.empty?
+      line_two.each do |lines|
+        text = File.read(lines)
+        if text.include?("tags:")
+          a = (text.split("\n---"))[0].delete("---").strip.split(": ")
+          b = a[0]
+          c = a[1].delete('"').split(', ')
+          tags = Hash.new
+          tags[b] = c
+          @values_only = tags.values.flatten
+        end
       end
+      line_two.pop
+      format_name
+      tag_file_name_gather(filepath)
     end
-    format_name
   end
 
   def self.format_name
@@ -27,6 +31,16 @@ class MetaData
     end
     downcased_format = underscored_words.map(&:downcase)
   end
+
+  def self.tag_file_name_gather(filepath)
+    unless format_name.empty?
+    format_name.each do |tag_name|
+      File.write("#{filepath}/_output/tags/#{tag_name}.html", "#{tag_name}")
+      end
+    end
+  end
+
 end
 
- p MetaData.create_tag_hash("testproject")
+  # MetaData.create_tag_hash("testproject")
+  # p MetaData.tag_file_name_gather

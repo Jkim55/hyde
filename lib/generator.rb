@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'erb'
 require './lib/file_converter'
+require './lib/meta_data'
 require 'kramdown'
 require 'pry'
 
@@ -38,6 +39,8 @@ class Generator
   def build_output_tree_structure(filepath)
     create_output_folders(filepath)
     copy_source_files_to_output(filepath)
+    MetaData.create_tag_hash(filepath)
+    MetaData.tag_file_name_gather(filepath)
     FileConverter.convert_to_html(filepath)
     FileConverter.reformat(filepath)
 
@@ -48,6 +51,7 @@ class Generator
   def create_output_folders(filepath)
     FileUtils.mkdir_p "#{filepath}/_output/css"
     FileUtils.mkdir_p "#{filepath}/_output/pages"
+    FileUtils.mkdir_p "#{filepath}/_output/tags"
     FileUtils.mkdir_p "#{filepath}/_output/posts"
     FileUtils.mkdir_p "#{filepath}/_output/"
   end
