@@ -4,9 +4,7 @@ require 'kramdown'
 
 class FileConverter
   def self.convert_to_html(filepath)
-    # binding.pry
     markdown = Dir.glob("#{filepath}/source/**/*.md")
-    # binding.pry
     markdown.each do |lines|
       current_file = File.read(lines)
       markdown = Kramdown::Document.new(current_file, :auto_ids => false).to_html
