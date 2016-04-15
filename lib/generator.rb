@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'erb'
 require './lib/file_converter'
+# require './lib/event_manager'
 require './lib/meta_data'
 require 'kramdown'
 require 'pry'

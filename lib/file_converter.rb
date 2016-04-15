@@ -15,11 +15,18 @@ class FileConverter
   end
 
   def self.reformat(filepath)
-      this = Dir.glob("#{filepath}/_output/**/*.html")
-      this.each do |files|
-        content = File.read(files)
-        erb = ERB.new(File.read("#{filepath}/source/layouts/default.html.erb")).result(binding)
-        File.write(files, erb)
+    files = Dir.glob("#{filepath}/_output/**/*.html")
+    files.each do |file|
+      content = File.read(file)
+      erb = ERB.new(File.read("#{filepath}/source/layouts/default.html.erb")).result(binding)
+      File.write(file, erb)
+    end
+  end
+
+    def self.title(filepath)
+      files = Dir.glob("#{filepath}/_output/**/*.html.erb")
+      files.each do |file|
+        title = 
       end
     end
 end
